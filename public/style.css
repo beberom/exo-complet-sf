@@ -1,0 +1,16 @@
+h1, a, p, h2{
+    text-align: center;
+}
+
+header{
+    background: #60d6ff;
+}
+
+.couleur{
+    background-color: fuchsia;
+    margin-top: 150px;
+}
+
+.droite{
+    text-align: right;
+}

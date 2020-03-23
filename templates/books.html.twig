@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+    {% block titre %}
+
+        <h1>Bienvenue dans la bibliothète</h1>
+
+    {% endblock %}
+
+
+    {% block livre %}
+        {% for key, book in books %}
+            <a href="{{ path('livre', { 'id': book.id}) }}"><h2> {{ book.title }}</h2></a>
+        {% endfor %}
+    {% endblock %}
+
