@@ -8,8 +8,8 @@
 
 
     {% block livre %}
-        {% for key, book in books %}
-            <a href="{{ path('livre', { 'id': book.id}) }}"><h2> {{ book.title }}</h2></a>
+        {% for book in books %}
+            <a href="{{ path('book_show', { 'id': book.id}) }}"><h2> {{ book.title }}</h2></a>
         {% endfor %}
     {% endblock %}
 

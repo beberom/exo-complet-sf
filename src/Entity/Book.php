@@ -47,7 +47,7 @@ class Book
         return $this->title;
     }
 
-    public function setTitle($title): self
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -58,7 +58,7 @@ class Book
         return $this->resume;
     }
 
-    public function setResume($resume): self
+    public function setResume($resume): void
     {
         $this->resume = $resume;
     }
@@ -69,7 +69,7 @@ class Book
         return $this->author;
     }
 
-    public function setAuthor($author): self
+    public function setAuthor($author): void
     {
         $this->author = $author;
     }
@@ -80,7 +80,7 @@ class Book
         return $this->nbPages;
     }
 
-    public function setNbPages($nbPages): self
+    public function setNbPages($nbPages): void
     {
         $this->nbPages = $nbPages;
     }

@@ -2,15 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 class HomeController extends AbstractController{
 
     /**
-     * @Route("/", name="book")
+     * @Route("/", name="books_list")
      */
     public function books( BookRepository $bookRepository){
 
@@ -22,7 +26,7 @@ class HomeController extends AbstractController{
     }
 
     /**
-     * @Route("/book/{id}", name="livre")
+     * @Route("/book/show/{id}", name="book_show")
      */
     public function book ( BookRepository $bookRepository, $id ){
 
@@ -33,6 +37,25 @@ class HomeController extends AbstractController{
 
     }
 
+    /**
+     * @Route("/book/insert", name="book_insert")
+     */
+    public function insertBook(EntityManagerInterface $entityManager)
+    {
 
+        $book = new Book();
+
+        $book->setTitle('Game Of Thrones');
+        $book->setAuthor('Minussss');
+        $book->setNbPages(200);
+        $book->setResume('Neuf familles nobles rivalisent pour le contrôle du Trône de Fer dans les sept royaumes de Westeros. Pendant ce temps, des anciennes créatures mythiques oubliées reviennent pour faire des ravages.');
+
+        $entityManager->persist($book);
+
+        $entityManager->flush();
+
+        return new Response('livre enregistré');
+
+    }
 
 }
