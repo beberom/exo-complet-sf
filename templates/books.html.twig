@@ -11,6 +11,7 @@
         {% for book in books %}
             <a href="{{ path('book_show', { 'id': book.id}) }}"><h2> {{ book.title }}</h2></a>
             <a href="{{ path('book_delete', { 'id': book.id}) }}"><span>Supprimer</span></a>
+            <a href="{{ path('book_update', { 'id': book.id}) }}"><span>Modifier</span></a>
         {% endfor %}
     {% endblock %}
 

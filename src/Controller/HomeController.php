@@ -70,4 +70,36 @@ class HomeController extends AbstractController{
             'book'=> $book
         ]);
     }
+
+    /**
+     * @Route("/book/update/{id}", name="book_update")
+     */
+    public function updatebook(BookRepository $bookRepository, $id, EntityManagerInterface $entityManager){
+
+
+
+
+        $book = $bookRepository->find($id);
+        $book->setTitle('Walking Dead');
+        $entityManager -> persist($book);
+        $entityManager -> flush();
+
+        return $this->render('update.html.twig', [
+            'book'=> $book
+        ]);
+
+    }
+
+    /**
+     * @Route("/book/search", name="book_search")
+     */
+    public function searchByResume(BookRepository $bookRepository)
+    {
+
+        $books = $bookRepository->getByWordInResume();
+
+        return $this->render('books.html.twig', [
+            'books'=> $books
+        ]);
+    }
 }
