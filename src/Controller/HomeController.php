@@ -58,4 +58,16 @@ class HomeController extends AbstractController{
 
     }
 
+    /**
+     * @Route("/book/delete/{id}", name="book_delete")
+     */
+    public function deletebook(BookRepository $bookRepository, $id, EntityManagerInterface $entityManager){
+
+        $book = $bookRepository->find($id);
+        $entityManager -> remove($book);
+        $entityManager -> flush();
+        return $this->render('delete.html.twig', [
+            'book'=> $book
+        ]);
+    }
 }
