@@ -64,10 +64,10 @@ class HomeController extends AbstractController{
     public function deletebook(BookRepository $bookRepository, $id, EntityManagerInterface $entityManager){
 
         $book = $bookRepository->find($id);
-        $entityManager -> remove($book);
-        $entityManager -> flush();
+        $entityManager->remove($book);
+        $entityManager->flush();
         return $this->render('delete.html.twig', [
-            'book'=> $book
+            'book'=>$book
         ]);
     }
 
@@ -81,11 +81,11 @@ class HomeController extends AbstractController{
 
         $book = $bookRepository->find($id);
         $book->setTitle('Walking Dead');
-        $entityManager -> persist($book);
-        $entityManager -> flush();
+        $entityManager->persist($book);
+        $entityManager->flush();
 
         return $this->render('update.html.twig', [
-            'book'=> $book
+            'book'=>$book
         ]);
 
     }
@@ -93,10 +93,10 @@ class HomeController extends AbstractController{
     /**
      * @Route("/book/search", name="book_search")
      */
-    public function searchByResume(BookRepository $bookRepository)
+    public function searchByResume(BookRepository $bookRepository, Request $request)
     {
-
-        $books = $bookRepository->getByWordInResume();
+        $search = $request->query->get('search');
+        $books = $bookRepository->getByWordInResume($search);
 
         return $this->render('books.html.twig', [
             'books'=> $books
