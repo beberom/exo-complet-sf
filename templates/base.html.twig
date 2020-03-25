@@ -9,6 +9,10 @@
     <body>
         <header>
             {% block titre %} {% endblock %}
+            <form name="search" action="{{ path('book_search') }}" method="get">
+                <input type="search" name="search" />
+                <input type="submit" value="Envoyer" />
+            </form>
         </header>
         <main>
             {% block livre %} {% endblock %}

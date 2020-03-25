@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController{
 
     /**
-     * @Route("/", name="books_list")
+     * @Route("/book", name="books_list")
      */
     public function books( BookRepository $bookRepository){
 
@@ -66,9 +66,7 @@ class HomeController extends AbstractController{
         $book = $bookRepository->find($id);
         $entityManager->remove($book);
         $entityManager->flush();
-        return $this->render('delete.html.twig', [
-            'book'=>$book
-        ]);
+        return new Response('livre supprimé');
     }
 
     /**
@@ -84,9 +82,7 @@ class HomeController extends AbstractController{
         $entityManager->persist($book);
         $entityManager->flush();
 
-        return $this->render('update.html.twig', [
-            'book'=>$book
-        ]);
+        return new Response('livre mis à jour');
 
     }
 
@@ -98,8 +94,9 @@ class HomeController extends AbstractController{
         $search = $request->query->get('search');
         $books = $bookRepository->getByWordInResume($search);
 
-        return $this->render('books.html.twig', [
-            'books'=> $books
+        return $this->render('search.html.twig', [
+            'books'=> $books,
+            'search'=>$search,
         ]);
     }
 }
