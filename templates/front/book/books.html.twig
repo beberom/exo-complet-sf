@@ -1,0 +1,14 @@
+{% for book in books %}
+    <h1>Mon livre : </h1>
+    <div>
+        <p>Titre : {{ book.title }}</p>
+        <p>Résumé : {{ book.resume }}</p>
+        <p>Nombre de pages : {{ book.nbPages }}</p>
+        {# book.author fait directement la requête Join vers la table author
+         pour récupérer les infos de l'auteur relié au livre #}
+        <p>Auteur relié : {{ book.author.firstName }} {{ book.author.name }} </p>
+    </div>
+    <a href="{{ path('book_show', {'id' : book.id}) }}">
+        Voir le livre
+    </a>
+{% endfor %}

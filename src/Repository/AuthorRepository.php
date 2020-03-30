@@ -19,28 +19,8 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
-    public function getByWordInResume($word)
-    {
-
-        $queryBuilder = $this->createQueryBuilder('author');
-
-
-        $query = $queryBuilder->select('author')
-
-            ->where('author.biography LIKE :word')
-
-            ->setParameter('word', '%'.$word.'%')
-
-            ->getQuery();
-
-        $results = $query->getResult();
-
-
-        return $results;
-    }
-
     // /**
-    //  * @return Author[] Returns an array of Author objects
+    //  * @return author[] Returns an array of author objects
     //  */
     /*
     public function findByExampleField($value)
@@ -57,7 +37,7 @@ class AuthorRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Author
+    public function findOneBySomeField($value): ?author
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')

@@ -17,14 +17,19 @@ class Author
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $firstName;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $biography;
 
     /**
      * @ORM\Column(type="date")
@@ -32,14 +37,20 @@ class Author
     private $birthDate;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $deathDate;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
+     *
+     * Je viens faire la relation inverse du ManyToOne, c'est à dire le OneToMany
+     * Pour pouvoir récupérer pour chaque auteur tous les livre
+     *
+     * 'mappedBy' est obligatoire, et il faut renseigner ici la propriété qui, dans l'entité Book,
+     * appelle l'entité Auteur
      */
-    private $biography;
+    private $books;
 
     public function getId(): ?int
     {
@@ -70,6 +81,18 @@ class Author
         return $this;
     }
 
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(?string $biography): self
+    {
+        $this->biography = $biography;
+
+        return $this;
+    }
+
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birthDate;
@@ -87,22 +110,27 @@ class Author
         return $this->deathDate;
     }
 
-    public function setDeathDate(\DateTimeInterface $deathDate): self
+    public function setDeathDate(?\DateTimeInterface $deathDate): self
     {
         $this->deathDate = $deathDate;
 
         return $this;
     }
 
-    public function getBiography(): ?string
+    /**
+     * @return mixed
+     */
+    public function getBooks()
     {
-        return $this->biography;
+        return $this->books;
     }
 
-    public function setBiography(string $biography): self
+    /**
+     * @param mixed $books
+     */
+    public function setBooks( $books ): void
     {
-        $this->biography = $biography;
-
-        return $this;
+        $this->books = $books;
     }
+
 }

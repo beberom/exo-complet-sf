@@ -1,0 +1,16 @@
+<h1>Bienvenue sur la librairie en ligne ! </h1>
+
+<h2>Les derniers lives ajoutés : </h2>
+
+{% for book in books %}
+    <article>
+        <h3>Titre : {{ book.title }}</h3>
+        <p>Auteur relié : {{ book.author.firstName }} {{ book.author.name }} </p>
+        <p>Résumé : {{ book.resume }}</p>
+        <p>Nombre de pages : {{ book.nbPages }}</p>
+    </article>
+    <br/>
+{% endfor %}
+
+<a href="{{ path('book_list') }}">Voir les livres</a>
+<a href="{{ path('author_list') }}">Voir les auteurs</a>

@@ -1,0 +1,27 @@
+
+{% for author in authors %}
+    <article>
+
+        <p>{{ author.firstName }} {{ author.name }}</p>
+        <p>{{ author.biography }}</p>
+        <p>Naissance: {{ author.birthDate| date('d-m-Y') }}</p>
+
+        {% if author.deathDate %}
+            <p>Mort: {{ author.deathDate| date('d-m-Y') }}</p>
+        {% endif %}
+
+        <a href="{{ path('author_show', {'id': author.id}) }}">Voir l'auteur</a>
+
+        <p>Livres : </p>
+        {# Pour chaque livre reliés à l'auteur, j'affiche le titre du livre.
+            La propriété books d'un author contient un array avec tous les livres
+         #}
+        {% for book in author.books %}
+            <p>{{ book.title }}</p>
+        {% endfor %}
+
+        <br/>
+        ____
+
+    </article>
+{% endfor %}

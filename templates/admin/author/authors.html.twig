@@ -1,0 +1,22 @@
+
+
+{% for author in authors %}
+    <article>
+
+        <p>{{ author.firstName }} {{ author.name }}</p>
+        <p>{{ author.biography }}</p>
+        <p>Naissance: {{ author.birthDate| date('d-m-Y') }}</p>
+
+        {% if author.deathDate %}
+            <p>Mort: {{ author.deathDate| date('d-m-Y') }}</p>
+        {% endif %}
+
+        <a href="{{ path('admin_author_show', {'id': author.id}) }}">Voir l'auteur</a>
+        <a href="{{ path('admin_author_delete', {'id': author.id}) }}">Supprimer l'auteur</a>
+        <a href="{{ path('admin_author_update', {'id': author.id}) }}">Modifier l'auteur</a>
+
+        <br/>
+        ____
+
+    </article>
+{% endfor %}
